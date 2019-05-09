@@ -226,7 +226,7 @@ Button btn_back,btn_next;
 
 
                     }else {
-                        Toast.makeText(Service_State_Distt_Reg_Activity.this, "no state found", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Service_State_Distt_Reg_Activity.this, "No state found", Toast.LENGTH_SHORT).show();
                     }
                     super.onPostExecute(output);
                 } catch (JSONException e) {
