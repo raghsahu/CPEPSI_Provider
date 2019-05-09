@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Please Select Your Service Type"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="#000"
+            android:textSize="16dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/xml_textbox_bg"
+            android:gravity="center">
+
+            <Spinner
+                android:id="@+id/service_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp">
+
+            </Spinner>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="1">
+
+            <Button
+                android:id="@+id/choose_back"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="2.5dp"
+                android:layout_weight="0.50"
+                android:background="@drawable/btn_shape"
+                android:text="Back"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+
+            <Button
+                android:id="@+id/choose_next"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2.5dp"
+                android:layout_weight="0.50"
+                android:background="@drawable/btn_shape"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

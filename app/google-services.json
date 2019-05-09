@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "330185352783",
+    "firebase_url": "https://cifato-bbc54.firebaseio.com",
+    "project_id": "cifato-bbc54",
+    "storage_bucket": "cifato-bbc54.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:330185352783:android:6206f6ebe749ee86",
+        "android_client_info": {
+          "package_name": "com.provider.admin.cpepsi_provider"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "330185352783-v6ui7el4qketgehsjf1pu2iv073qkhqe.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCSTPQjEaSzlYEzYp7O0jsHplBzR42-Lbg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

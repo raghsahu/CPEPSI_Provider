@@ -1,0 +1,22 @@
+<resources>
+    <!--<string name="terms">I accept terms and condition and allow GPS tracking,use of contact number,messaging,cameraphoto,video etc</string>-->
+    <string name="terms">Please Accept Terms and Conditions</string>
+    <string name="app_name">CPEPSI-SP</string>
+    <string name="title_activity_get_locattion_activity">Map</string>
+    <string name="title_activity_home_navigation">Home</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="problem">If any problem persist write us <b>help.cpepsi@gmail.com</b> or Call <b>8433013702</b>.</string>
+
+    <string-array name="business_type">
+        <item>Individual</item>
+
+    </string-array>
+    <string name="title_activity_maps_location">Map</string>
+
+</resources>

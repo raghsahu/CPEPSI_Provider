@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Profession_As_Provider">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registration Form for Provider"
+            android:textAlignment="center"
+            android:textSize="20dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/first_name_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Name"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="8dp">-->
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:textColorHint="#000">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/mid_of_provider"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="Middle Name"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:textSize="13dp" />-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+        <!--</LinearLayout>-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="5dp"-->
+            <!--android:orientation="vertical"-->
+            <!--android:padding="8dp">-->
+
+            <!--<android.support.design.widget.TextInputLayout-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="8dp"-->
+                <!--android:textColorHint="#000">-->
+
+                <!--<EditText-->
+                    <!--android:id="@+id/surname_of_provider"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:hint="Last Name"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:textSize="13dp" />-->
+
+            <!--</android.support.design.widget.TextInputLayout>-->
+        <!--</LinearLayout>-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.90"
+                android:gravity="center"
+                android:text="+91" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.10"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/contact_no_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact No.*"
+                    android:inputType="numberSigned"
+                    android:maxLength="10"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/email_id_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email ID"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:textColorHint="#000"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFA500"
+                >
+
+                <EditText
+                    android:id="@+id/pass_of_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    android:maxLength="8"
+                    android:inputType="textPassword"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+           <!-- <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/conpass_of_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Confirm Password"
+                    android:maxLength="8"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>-->
+
+            <android.support.design.widget.TextInputLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/business"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="business"
+                    android:text="ngo"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/cityc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="City"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/statee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="State"
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/placee"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Address with office/house no."
+                    android:inputType="textPersonName"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/dateob"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date of Birth"
+                    android:focusable="false"
+                    android:editable="false"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/adharNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Adhar Number"
+
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <CheckBox
+                android:layout_gravity="center"
+                android:id="@+id/check_per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:gravity="center"
+                android:id="@+id/text_reg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:lines="3"
+                android:textColor="#000"
+                android:text="@string/terms" />
+
+        </LinearLayout>
+
+        <!--<Button-->
+            <!--android:id="@+id/sbmt_pro"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="right"-->
+            <!--android:text="Next" />-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/sbmt_pro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_shape"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

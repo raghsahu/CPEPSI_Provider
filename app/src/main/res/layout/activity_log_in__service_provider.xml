@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFA500"
+    android:orientation="vertical"
+    android:weightSum="1"
+
+    tools:context=".LOG_in_Service_provider">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tool"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.20"
+        android:background="#FFA500"
+        android:visibility="gone"></android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="#FFA500"
+        android:orientation="vertical">
+
+        <!-- <TextView
+             android:textColor="#fff"
+             android:textAllCaps="true"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Log in"
+             android:textAlignment="center"
+             android:textSize="20dp"
+             />-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="Welcome to CPEPSI-SP APP"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textColor="#fff"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:typeface="serif" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="This App provides you to grow your"
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="business and earn more."
+                    android:textAlignment="center"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0.90"
+        android:background="#FFA500"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="10dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/ema_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:hint="Email ID/Mobile No."
+                    android:textColor="#000"
+                    android:textSize="14dp" />
+            </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:cardCornerRadius="10dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:textColorHint="#000"
+                app:passwordToggleEnabled="true"
+                app:passwordToggleTint="#FFA500"
+                >
+
+                <EditText
+                    android:id="@+id/pass_provider"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#fff"
+                    android:hint="Password"
+
+                    android:inputType="textPassword"
+                    android:textColor="#000"
+                    android:textSize="14dp"
+
+                    />
+            </android.support.design.widget.TextInputLayout>
+        </android.support.v7.widget.CardView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.50"
+                android:background="#FFA500"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/ser_log"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#fff"
+                    android:text="Log In"
+                    android:textAllCaps="false" />
+
+            </android.support.v7.widget.CardView>
+
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.50"
+                android:background="#FFA500"
+                app:cardCornerRadius="10dp">
+
+                <Button
+                    android:id="@+id/ser_for"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:background="#fff"
+                    android:text="Forget Password"
+                    android:textAllCaps="false" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:gravity="center">
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="0.50"
+                android:background="#FFA500"
+                app:cardCornerRadius="10dp">
+
+
+            <TextView
+                android:id="@+id/ser_reg"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:gravity="center"
+                android:background="#fff"
+                android:text="New Customer Please Register"
+                android:textColor="#000" />
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="15dp"
+            android:gravity="bottom">
+        <TextView
+            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:text="@string/problem"
+            android:textColor="#fff" />
+
+
+    </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

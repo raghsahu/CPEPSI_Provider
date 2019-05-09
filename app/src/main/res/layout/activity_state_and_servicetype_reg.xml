@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFA500"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:text="Register for Service provider"
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="20dp"
+        android:typeface="serif" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please Select Your State"
+        android:textColor="#000"
+        android:textSize="15dp"
+        android:typeface="serif" />
+    </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp"
+    android:orientation="vertical"
+    android:padding="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/xml_textbox_bg"
+        android:gravity="center"
+        android:textColorHint="#000">
+
+        <Spinner
+            android:id="@+id/state_type"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"></Spinner>
+
+    </LinearLayout>
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please Select Your Distict"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:typeface="serif" />
+    </LinearLayout>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:layout_marginTop="5dp"
+android:orientation="vertical"
+android:padding="5dp">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="45dp"
+    android:background="@drawable/xml_textbox_bg"
+    android:gravity="center"
+    android:textColorHint="#000">
+
+    <Spinner
+        android:id="@+id/sub_type_distt"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"></Spinner>
+
+</LinearLayout>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please Select Your Service Type"
+            android:textColor="#000"
+            android:textSize="15dp"
+            android:typeface="serif" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/xml_textbox_bg"
+            android:gravity="center"
+            android:textColorHint="#000">
+
+            <Spinner
+                android:id="@+id/service_type_spinner"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"></Spinner>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_margin="20dp"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="5dp"
+            android:layout_weight="0.50"
+            android:background="#FFA500"
+            app:cardCornerRadius="10dp">
+
+            <Button
+                android:id="@+id/choose_back"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:text="Back"
+                android:textAllCaps="false" />
+
+        </android.support.v7.widget.CardView>
+
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.50"
+            android:background="#FFA500"
+            app:cardCornerRadius="10dp">
+
+            <Button
+                android:id="@+id/choose_next"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#fff"
+                android:text="Next"
+                android:textAllCaps="false" />
+
+        </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

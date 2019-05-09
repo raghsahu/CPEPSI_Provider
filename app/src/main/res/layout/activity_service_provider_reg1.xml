@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/line_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".Service_provider_reg">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:text="Register for Service provider"
+            android:textAlignment="center"
+            android:textColor="#000"
+            android:textSize="20dp"
+            android:typeface="serif" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/loc_e_t"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Destination"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <ImageView
+                android:id="@+id/loc_trace"
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:layout_gravity="right"
+                android:layout_marginTop="-52dp"
+                android:src="@drawable/ic_add_location_black_24dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:gravity="center"
+            android:layout_marginLeft="5dp"
+            android:text="Please Select Service Subtype"
+            android:textSize="15dp"></TextView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:gravity="center"
+                android:textColorHint="#000">
+
+                <Spinner
+                    android:id="@+id/service_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"></Spinner>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:gravity="center"
+                android:textColorHint="#000">
+
+                <Spinner
+                    android:id="@+id/sub_type_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"></Spinner>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/xml_textbox_bg"
+                android:gravity="center"
+                android:textColorHint="#000">
+
+                <Spinner
+                    android:id="@+id/type_drop"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:entries="@array/business_type"
+                    >
+                </Spinner>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:padding="5dp">
+
+            <Button
+                android:id="@+id/sbmt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_shape"
+                android:text="Next"
+                android:textAllCaps="false"
+                android:textColor="#fff" />
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
