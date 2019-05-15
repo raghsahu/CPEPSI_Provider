@@ -7,7 +7,6 @@
     android:background="#FFA500"
     android:orientation="vertical"
     android:weightSum="1"
-
     tools:context=".LOG_in_Service_provider">
 
     <android.support.v7.widget.Toolbar
@@ -16,7 +15,9 @@
         android:layout_height="wrap_content"
         android:layout_weight="0.20"
         android:background="#FFA500"
-        android:visibility="gone"></android.support.v7.widget.Toolbar>
+        android:visibility="gone">
+
+    </android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -124,8 +125,7 @@
                 android:padding="5dp"
                 android:textColorHint="#000"
                 app:passwordToggleEnabled="true"
-                app:passwordToggleTint="#FFA500"
-                >
+                app:passwordToggleTint="#FFA500">
 
                 <EditText
                     android:id="@+id/pass_provider"
@@ -136,9 +136,7 @@
 
                     android:inputType="textPassword"
                     android:textColor="#000"
-                    android:textSize="14dp"
-
-                    />
+                    android:textSize="14dp"/>
             </android.support.design.widget.TextInputLayout>
         </android.support.v7.widget.CardView>
 

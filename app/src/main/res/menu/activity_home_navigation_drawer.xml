@@ -17,6 +17,10 @@
             android:icon="@drawable/request"
             android:title="Reviews" />
         <item
+            android:id="@+id/nav_terms"
+            android:icon="@drawable/terms"
+            android:title="Terms &amp; Conditions" />
+        <item
             android:visible="false"
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

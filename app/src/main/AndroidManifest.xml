@@ -31,7 +31,8 @@
         android:roundIcon="@drawable/pone"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Terms_Viewer"></activity>
+        <activity android:name=".TermsConditions"></activity>
+        <activity android:name=".Terms_Viewer" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

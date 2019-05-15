@@ -179,6 +179,10 @@ public class Home_navigation extends AppCompatActivity implements NavigationView
             Intent intent = new Intent(Home_navigation.this,Reviews.class);
             startActivity(intent);
 
+        }else if (id == R.id.nav_terms) {
+            Intent intent = new Intent(Home_navigation.this,TermsConditions.class);
+            startActivity(intent);
+
         } else if (id == R.id.nav_manage) {
           /*  Intent intent = new Intent(Home_navigation.this,FeedbackActivity.class);
             startActivity(intent);*/

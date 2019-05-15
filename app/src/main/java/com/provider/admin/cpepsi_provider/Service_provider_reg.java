@@ -14,6 +14,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 
 import android.support.v7.widget.RecyclerView;
@@ -30,9 +31,14 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.provider.admin.cpepsi_provider.Adapters.ReviewsAdapter;
 import com.provider.admin.cpepsi_provider.Adapters.Service_Recycler_Adapter;
+import com.provider.admin.cpepsi_provider.Adapters.SubCategoryAdapter;
 import com.provider.admin.cpepsi_provider.Java_files.Services;
+import com.provider.admin.cpepsi_provider.Model.ReviewsModel;
 import com.provider.admin.cpepsi_provider.Model.StateModel;
+import com.provider.admin.cpepsi_provider.Model.SubCategoryModel;
+import com.provider.admin.cpepsi_provider.SharedPreferences.AppPreference;
 import com.provider.admin.cpepsi_provider.SharedPreferences.SessionManager;
 import com.provider.admin.cpepsi_provider.Thread.Popup_thread;
 import com.provider.admin.cpepsi_provider.Util.HttpHandler;
@@ -103,6 +109,9 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
     private String strDateServer;
     EditText date_birth;
     public  String Address;
+    RecyclerView subType;
+    SubCategoryAdapter subCategoryAdapter;
+    private ArrayList<SubCategoryModel> subcatlist;
 
 
 //    Spinner spin_state;
@@ -137,6 +146,7 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
         line_layout = findViewById(R.id.line_layout);
         mContext = this;
 
+        subcatlist = new ArrayList<>();
 //        spin_state = (Spinner)findViewById(R.id.state_type);
 //        spin_distt = (Spinner)findViewById(R.id.sub_type_distt);
 //
@@ -297,7 +307,8 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
         }
         if (sessionManager.getSERVICE_SUB_KEY() != 10) {
             int subkey = sessionManager.getSERVICE_SUB_KEY();
-            new Get_The_Selected(sessionManager.getSERVICE_SUB_KEY()).execute();
+         //   new PostSubcategory(sessionManager.getSERVICE_SUB_KEY()).execute();
+            new PostSubcategory().execute();
         }
 
 
@@ -723,7 +734,148 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
         super.onBackPressed();
     }
 
-    private class Get_The_Selected extends AsyncTask<String, Void, String> {
+    //-----------------------------------------------------------
+
+    public class PostSubcategory extends AsyncTask<String, Void, String> {
+        ProgressDialog dialog;
+
+        protected void onPreExecute() {
+                    dialog = new ProgressDialog(Service_provider_reg.this);
+            dialog.show();
+
+        }
+
+        protected String doInBackground(String... arg0) {
+
+            try {
+
+                URL url = new URL("http://heightsmegamart.com/CPEPSI/api/Get_SubServices");
+
+                JSONObject postDataParams = new JSONObject();
+                postDataParams.put("Servicesid", AppPreference.getId(Service_provider_reg.this));
+
+                Log.e("postDataParams", postDataParams.toString());
+
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setReadTimeout(15000 /* milliseconds*/);
+                conn.setConnectTimeout(15000  /*milliseconds*/);
+                conn.setRequestMethod("POST");
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
+
+                OutputStream os = conn.getOutputStream();
+                BufferedWriter writer = new BufferedWriter(
+                        new OutputStreamWriter(os, "UTF-8"));
+                writer.write(getPostDataString(postDataParams));
+
+                writer.flush();
+                writer.close();
+                os.close();
+
+                int responseCode = conn.getResponseCode();
+
+                if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                    BufferedReader in = new BufferedReader(new
+                            InputStreamReader(
+                            conn.getInputStream()));
+
+                    StringBuffer sb = new StringBuffer("");
+                    String line = "";
+
+                    while ((line = in.readLine()) != null) {
+
+                        StringBuffer Ss = sb.append(line);
+                        Log.e("Ss", Ss.toString());
+                        sb.append(line);
+                        break;
+                    }
+
+                    in.close();
+                    return sb.toString();
+
+                } else {
+                    return new String("false : " + responseCode);
+                }
+            } catch (Exception e) {
+                return new String("Exception: " + e.getMessage());
+            }
+
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            if (result != null) {
+                dialog.dismiss();
+
+                JSONObject jsonObject = null;
+                String s = result.toString();
+                try {
+                    jsonObject = new JSONObject(result);
+                    String responce = jsonObject.getString("responce");
+                    if (responce.equals("true")) {
+                        JSONArray dataArray = jsonObject.getJSONArray("data");
+                        for (int i=0; i<dataArray.length(); i++){
+                            JSONObject dataObj = dataArray.getJSONObject(i);
+                            String id = dataObj.getString("id");
+                            String Service = dataObj.getString("Service");
+                            String type = dataObj.getString("type");
+                            String ServiceSubCategory = dataObj.getString("ServiceSubCategory");
+                            String service_charge = dataObj.getString("service_charge");
+                            String status = dataObj.getString("status");
+                            subcatlist.add(new SubCategoryModel(id, Service, type, ServiceSubCategory, service_charge, status));
+                         //   subcatlist.add(new SubCategoryModel(id, Service, type, ServiceSubCategory, service_charge, status));
+                        }
+
+                        subCategoryAdapter = new SubCategoryAdapter(Service_provider_reg.this, subcatlist);
+                        subType.setAdapter(subCategoryAdapter);
+
+                        if (responce.equalsIgnoreCase("true")) {
+                            dialog.dismiss();
+
+                        } else {
+                            //Toast.makeText(ScrollingActivity.this, output, Toast.LENGTH_LONG).show();
+                        }
+                    } else {
+                        // txtresult.setText("Oops! No Data.");
+                        Toast.makeText(Service_provider_reg.this, "Oops! No Data.", Toast.LENGTH_LONG).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        public String getPostDataString(JSONObject params) throws Exception {
+
+            StringBuilder result = new StringBuilder();
+            boolean first = true;
+
+            Iterator<String> itr = params.keys();
+
+            while (itr.hasNext()) {
+
+                String key = itr.next();
+                Object value = params.get(key);
+
+                if (first)
+                    first = false;
+                else
+                    result.append("&");
+
+                result.append(URLEncoder.encode(key, "UTF-8"));
+                result.append("=");
+                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
+
+            }
+            return result.toString();
+        }
+    }
+
+    //-----------------------------------------------------------------
+
+   /* private class Get_The_Selected extends AsyncTask<String, Void, String> {
         Context main_context;
         ProgressDialog Service_bar;
         URL url;
@@ -764,8 +916,8 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
                 Log.e("postDataParams", postDataParams.toString());
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000 /* milliseconds*/);
-                conn.setConnectTimeout(15000  /*milliseconds*/);
+                conn.setReadTimeout(15000 *//* milliseconds*//*);
+                conn.setConnectTimeout(15000  *//*milliseconds*//*);
                 conn.setRequestMethod("POST");
                 conn.setDoInput(true);
                 conn.setDoOutput(true);
@@ -886,287 +1038,5 @@ public class Service_provider_reg extends AppCompatActivity implements AdapterVi
             }
             super.onPostExecute(result);
         }
-    }
-
-//    private class stateExecuteTask extends AsyncTask<String,Integer,String> {
-//
-//        String output = "";
-//
-//
-//        @Override
-//        protected void onPreExecute() {
-//
-//            super.onPreExecute();
-//
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            String sever_url = "http://paramgoa.com/cpepsi/Api/get_state";
-//                    //+ AppPreference.getUserid(AddStudentActivity.this);
-//
-//
-//            output = HttpHandler.makeServiceCall(sever_url);
-//            System.out.println("getcomment_url" + output);
-//            return output;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String output) {
-//            if (output == null) {
-//            } else {
-//                try {
-//
-//                 //  Toast.makeText(Service_provider_reg.this, "result is" + output, Toast.LENGTH_SHORT).show();
-//                    JSONObject object=new JSONObject(output);
-//                    String res=object.getString("responce");
-//
-//                    if (res.equals("true")) {
-//
-//
-//                        JSONArray jsonArray = object.getJSONArray("state");
-//
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                            String state_id = jsonObject1.getString("state_id");
-//                            String state_name = jsonObject1.getString("state_name");
-//                            stateList.add(new StateModel(state_id, state_name));
-//                            StateHashMap.put(i, new StateModel(state_id,state_name));
-//                            ChooseState.add(state_name);
-//
-//                           // if (StateHashMap.)
-//
-//                        }
-//
-//                        stateAdapter = new ArrayAdapter<String>(Service_provider_reg.this, android.R.layout.simple_spinner_dropdown_item, ChooseState);
-//                        stateAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        spin_state.setAdapter(stateAdapter);
-//
-//
-//                    }else {
-//                        Toast.makeText(Service_provider_reg.this, "no state found", Toast.LENGTH_SHORT).show();
-//                    }
-//                    super.onPostExecute(output);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        }
-//    }
-//
-//
-//    public class DisttExecuteTask extends AsyncTask<String,Integer,String> {
-//
-//        String output = "";
-//
-//      String strStateId;
-//
-//        public DisttExecuteTask(String strSid) {
-//            this.strStateId=strSid;
-//        }
-//
-//        @Override
-//        protected String doInBackground(String... params) {
-//            String sever_url = "http://paramgoa.com/cpepsi/Api/get_district?state_id="+strStateId;
-//
-//            output = HttpHandler.makeServiceCall(sever_url);
-//            System.out.println("getcomment_url" + output);
-//            return output;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(String output) {
-//            if (output == null) {
-//            } else {
-//                try {
-//
-//                    //  Toast.makeText(Service_provider_reg.this, "result is" + output, Toast.LENGTH_SHORT).show();
-//                    JSONObject object=new JSONObject(output);
-//                    String res=object.getString("responce");
-//
-//                    if (res.equals("true")) {
-//
-//
-//                        JSONArray jsonArray = object.getJSONArray("data");
-//
-//                        for (int i = 0; i < jsonArray.length(); i++) {
-//                            JSONObject jsonObject1 = jsonArray.getJSONObject(i);
-//                            String state_id = jsonObject1.getString("state_id");
-//                            String state_name = jsonObject1.getString("state_name");
-//
-//
-//                            disttList.add(new StateModel(state_id, state_name));
-//                           // StateHashMap.put(state_id, new StateModel(state_id,state_name));
-//                            ChooseDistt.add(state_name);
-//
-//                        }
-//
-//                        disttAdapter = new ArrayAdapter<String>(Service_provider_reg.this, android.R.layout.simple_spinner_dropdown_item, ChooseDistt);
-//                        disttAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//                        spin_distt.setAdapter(disttAdapter);
-//
-//
-//                       // reloadAllData();
-//
-//                    }else {
-//                        Toast.makeText(Service_provider_reg.this, "no state found", Toast.LENGTH_SHORT).show();
-//                    }
-//                    super.onPostExecute(output);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//        }
-//    }
-
-    //---------------------------------------------------------------
-
-  /*  private class Register_The_Provider extends AsyncTask<String, Void, String> {
-
-        int service_id;
-        ProgressDialog dialog;
-        int size_of_services = 0;
-        View v;
-
-        public Register_The_Provider(View v) {
-//            this.service_id = service_txt_id;
-            this.v = v;
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-            dialog = new ProgressDialog(v.getContext());
-            dialog.show();
-
-            super.onPreExecute();
-        }
-
-
-        @Override
-        protected String doInBackground(String... strings) {
-
-            try {
-
-                URL url = new URL("https://www.paramgoa.com/cpepsi/api/Ragistration");
-
-                JSONObject postDataParams = new JSONObject();
-                postDataParams.put("TypeofFirm", type_spinner_val);
-                postDataParams.put("service", Service);
-                postDataParams.put("sub_service", Sub_service);
-                postDataParams.put("number", contact_no_service_val);
-                postDataParams.put("Designation", full_Address);
-                postDataParams.put("City", state);
-                postDataParams.put("state", place);
-                postDataParams.put("place", place);
-                postDataParams.put("name", first_name_provider.getText().toString());
-                postDataParams.put("sirname", surname_of_provider.getText().toString());
-                postDataParams.put("middle", mid_of_provider.getText().toString());
-                postDataParams.put("emailid", email_id_provider.getText().toString());
-                postDataParams.put("password", pass_of_provider.getText().toString());
-                postDataParams.put("business", pass_of_provider.getText().toString());
-                postDataParams.put("dob", pass_of_provider.getText().toString());
-                postDataParams.put("adharno", pass_of_provider.getText().toString());
-
-                Log.e("postDataParams", postDataParams.toString());
-
-                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-                conn.setReadTimeout(15000 *//* milliseconds*//*);
-                conn.setConnectTimeout(15000  *//*milliseconds*//*);
-                conn.setRequestMethod("POST");
-                conn.setDoInput(true);
-                conn.setDoOutput(true);
-
-                OutputStream os = conn.getOutputStream();
-                BufferedWriter writer = new BufferedWriter(
-                        new OutputStreamWriter(os, "UTF-8"));
-                writer.write(getPostDataString(postDataParams));
-
-                writer.flush();
-                writer.close();
-                os.close();
-
-                int responseCode = conn.getResponseCode();
-
-                if (responseCode == HttpsURLConnection.HTTP_OK) {
-
-                    BufferedReader r = new BufferedReader(new InputStreamReader(conn.getInputStream()));
-                    StringBuilder result = new StringBuilder();
-                    String line;
-                    while ((line = r.readLine()) != null) {
-                        result.append(line);
-                    }
-                    r.close();
-                    return result.toString();
-
-                } else {
-                    return new String("false : " + responseCode);
-                }
-            } catch (Exception e) {
-                return new String("Exception: " + e.getMessage());
-            }
-        }
-
-
-        public String getPostDataString(JSONObject params) throws Exception {
-
-            StringBuilder result = new StringBuilder();
-            boolean first = true;
-
-            Iterator<String> itr = params.keys();
-
-            while (itr.hasNext()) {
-
-                String key = itr.next();
-                Object value = params.get(key);
-
-                if (first)
-                    first = false;
-                else
-                    result.append("&");
-
-                result.append(URLEncoder.encode(key, "UTF-8"));
-                result.append("=");
-                result.append(URLEncoder.encode(value.toString(), "UTF-8"));
-
-            }
-            return result.toString();
-        }
-
-
-        @Override
-        protected void onPostExecute(String result) {
-            dialog.dismiss();
-            if (result != null) {
-                //  dialog.dismiss();
-
-
-                Log.e("PostRegistration", result.toString());
-
-                try {
-
-                    JSONObject jsonObject = new JSONObject(result);
-                    boolean response = jsonObject.getBoolean("responce");
-
-                    if (response) {
-                        Intent to_completion = new Intent(Service_provider_reg.this, Home_navigation.class);
-                        startActivity(to_completion);
-                        Snackbar.make(v, "Successful " + response, Toast.LENGTH_LONG).show();
-                        Toast.makeText(Service_provider_reg.this, "User registered successfully", Toast.LENGTH_SHORT).show();
-
-                    } else {
-                        Toast.makeText(Service_provider_reg.this, "Could not user register the user", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-            super.onPostExecute(result);
-        }
-
     }*/
-
 }

@@ -95,6 +95,7 @@
             android:padding="5dp">
 
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/xml_textbox_bg"
@@ -105,6 +106,20 @@
                     android:id="@+id/sub_type_drop"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"></Spinner>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/subType"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </android.support.v7.widget.RecyclerView>
 
             </LinearLayout>
         </LinearLayout>

@@ -145,6 +145,96 @@
 
             </android.support.design.widget.TextInputLayout>
 
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/photoId"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2000"
+                    android:hint="Photo ID and DOB"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/cancelCheck"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2000"
+                    android:hint="Cancel check"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/bankDetail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2000"
+                    android:hint="Bank detail"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/aadharCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2000"
+                    android:hint="AADHAAR Card"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:textColorHint="#000">
+
+                <EditText
+                    android:id="@+id/addressProof"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="2000"
+                    android:hint="Address proof"
+                    android:inputType="textPersonName|textMultiLine"
+                    android:textColor="#000"
+                    android:textSize="13dp" />
+
+            </android.support.design.widget.TextInputLayout>
+
             <Button
                 android:id="@+id/profile_submit"
                 android:layout_width="match_parent"

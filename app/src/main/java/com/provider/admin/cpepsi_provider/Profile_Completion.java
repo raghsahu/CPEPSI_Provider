@@ -82,8 +82,10 @@ public class Profile_Completion extends AppCompatActivity {
     String image;
     private ProfileModel profileModel;
     Button profile_submit;
-    EditText profileName, profileEmail, profileNumber, profilePassword, profileAddress, profileBusiness, profileLocation;
-    String ProfileName, ProfileEmail, ProfileNumber, ProfilePassword, ProfileAddress, ProfileBusiness, ProfileLocation;
+    EditText profileName, profileEmail, profileNumber, profilePassword, profileAddress, profileBusiness, profileLocation,
+            photoId,cancelCheck,bankDetail,aadharCard,addressProof;
+    String ProfileName, ProfileEmail, ProfileNumber, ProfilePassword, ProfileAddress, ProfileBusiness, ProfileLocation,
+            PhotoId,CancelCheck,BankDetail,AadharCard,AddressProof;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +126,13 @@ public class Profile_Completion extends AppCompatActivity {
         profileAddress = (EditText) findViewById(R.id.profileAddress);
         profileBusiness = (EditText) findViewById(R.id.profileBusiness);
         profileLocation = (EditText) findViewById(R.id.profileLocation);
+        photoId = (EditText) findViewById(R.id.photoId);
+        cancelCheck = (EditText) findViewById(R.id.cancelCheck);
+        bankDetail = (EditText) findViewById(R.id.bankDetail);
+        aadharCard = (EditText) findViewById(R.id.aadharCard);
+        addressProof = (EditText) findViewById(R.id.addressProof);
+
+
 
         badge_notification_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -148,6 +157,11 @@ public class Profile_Completion extends AppCompatActivity {
                 ProfileAddress = profileAddress.getText().toString();
                 ProfileBusiness = profileBusiness.getText().toString();
                 ProfileLocation = profileLocation.getText().toString();
+                PhotoId = photoId.getText().toString();
+                CancelCheck = cancelCheck.getText().toString();
+                BankDetail = bankDetail.getText().toString();
+                AadharCard = aadharCard.getText().toString();
+                AddressProof = addressProof.getText().toString();
 
                 new PostSave().execute();
             }
@@ -498,6 +512,12 @@ public class Profile_Completion extends AppCompatActivity {
                 postDataParams.put("address", ProfileAddress);
                 postDataParams.put("business", ProfileBusiness);
                 postDataParams.put("location", ProfileLocation);
+                postDataParams.put("user_id", UserId);
+
+                postDataParams.put("user_id", UserId);
+                postDataParams.put("user_id", UserId);
+                postDataParams.put("user_id", UserId);
+                postDataParams.put("user_id", UserId);
                 postDataParams.put("user_id", UserId);
 
                 Log.e("postDataParams", postDataParams.toString());
