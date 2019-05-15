@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -646,6 +647,9 @@ public class Service_provider_reg1 extends AppCompatActivity {
                         }
 
                         subCategoryAdapter = new SubCategoryAdapter(Service_provider_reg1.this, subcatlist);
+                        LinearLayoutManager llm = new LinearLayoutManager(Service_provider_reg1.this);
+                        llm.setOrientation(LinearLayoutManager.VERTICAL);
+                        subType.setLayoutManager(llm);
                         subType.setAdapter(subCategoryAdapter);
 
                         if (responce.equalsIgnoreCase("true")) {
