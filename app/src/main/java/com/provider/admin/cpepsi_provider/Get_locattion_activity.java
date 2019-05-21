@@ -37,6 +37,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -60,6 +61,7 @@ public class Get_locattion_activity extends FragmentActivity implements OnMapRea
     Address address;
     double latitude;
     List<Address> event_address;
+    private ArrayList<String> stringList;
  //   String locality = "Indore", place = "Krishnodaya Nagar";
 
     String state_of_provider, place_of_provider;
@@ -80,6 +82,10 @@ public class Get_locattion_activity extends FragmentActivity implements OnMapRea
 //                .enableAutoManage(this, GOOGLE_API_CLIENT_ID, this)
 //                .build();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
+       /* if (getIntent() != null) {
+            stringList = getIntent().getStringArrayListExtra("ListId");
+        }*/
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         checkthepermisions();

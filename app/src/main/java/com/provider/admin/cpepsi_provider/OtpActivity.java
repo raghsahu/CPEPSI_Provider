@@ -61,7 +61,7 @@ public class OtpActivity extends AppCompatActivity {
 
         TypeofFirm = getIntent().getStringExtra("TypeofFirm");
         Service = getIntent().getStringExtra("service");
-        Sub_service = getIntent().getStringExtra("sub_service");
+        Sub_service = getIntent().getStringExtra("sub_servicee");
         Number = getIntent().getStringExtra("number");
         Designation = getIntent().getStringExtra("Designation");
         City = getIntent().getStringExtra("City");
@@ -74,6 +74,7 @@ public class OtpActivity extends AppCompatActivity {
         Dob = getIntent().getStringExtra("dob");
         Adharno = getIntent().getStringExtra("adharno");
 
+        Log.e("Sub_service",Sub_service);
         // Sub_service="hardware";
 
         bt_verify.setOnClickListener(new View.OnClickListener() {

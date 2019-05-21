@@ -71,6 +71,10 @@ public class Profession_As_Provider extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profession__as__provider);
 
+      /*  if (getIntent() != null) {
+            stringList = getIntent().getStringArrayListExtra("ListId");
+        }*/
+
         sbmt_pro = (Button) findViewById(R.id.sbmt_pro);
         check_per = (CheckBox) findViewById(R.id.check_per);
         text_reg = findViewById(R.id.text_reg);
@@ -144,14 +148,13 @@ public class Profession_As_Provider extends AppCompatActivity {
 
         type_spinner_val = getIntent().getStringExtra("type_spinner");
         Service = getIntent().getStringExtra("service_in");
-        Sub_service = getIntent().getStringExtra("sub_service_in");
+        Sub_service = getIntent().getStringExtra("strFinal");
         try{
             if(!Sub_service.isEmpty())
             {
 
             }
-        }catch (Exception e)
-        {
+        }catch (Exception e) {
             Sub_service = "xxx";
             e.printStackTrace();
         }
@@ -425,13 +428,12 @@ public class Profession_As_Provider extends AppCompatActivity {
                     responce = jsonObject.getString("responce");
 
 
-
                     if (msg.equals("OTP Sent Successfully")) {
                         Intent to_completion = new Intent(Profession_As_Provider.this, OtpActivity.class);
                        to_completion.putExtra("Otp",responce);
                         to_completion.putExtra("TypeofFirm", type_spinner_val);
                         to_completion.putExtra("service", Service);
-                        to_completion.putExtra("sub_service", Sub_service);
+                        to_completion.putExtra("sub_servicee", Sub_service);
                         to_completion.putExtra("number", contact_no_provider.getText().toString());
                         to_completion.putExtra("Designation", full_Address);
                         to_completion.putExtra("City", cityc.getText().toString());

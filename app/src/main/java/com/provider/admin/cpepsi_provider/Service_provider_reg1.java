@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -41,6 +42,7 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -74,6 +76,9 @@ public class Service_provider_reg1 extends AppCompatActivity {
     RecyclerView subType;
     SubCategoryAdapter subCategoryAdapter;
     private ArrayList<SubCategoryModel> subcatlist;
+    StringBuilder builder = new StringBuilder();
+    private String strFinal;
+    private ArrayList<String> idList = new ArrayList<>();
 
 
     @Override
@@ -98,18 +103,38 @@ public class Service_provider_reg1 extends AppCompatActivity {
         type_spinner = (Spinner) findViewById(R.id.type_drop);
 
         manager = new SessionManager(this);
-//***********************************************************************
+
+        //***********************************************************************
+
+       /* List<SubCategoryModel> stList = subCategoryAdapter.getItemDetailList();
+        for (SubCategoryModel itemDetails : stList) {
+            if (itemDetails.isSelected()) {
+                String sub = itemDetails.getId();
+                idList.add(itemDetails.getId());
+                builder.append(sub + ",");
+                strFinal = String.valueOf(builder);
+                Log.e("Subject", sub);
+                Log.e("Appended", strFinal);
+            }
+        } */
+
         loc_trace.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent go_get_location = new Intent(Service_provider_reg1.this, Get_locattion_activity.class);
                 go_get_location.putExtra("ser_ty2", selected_ser_type);
+                go_get_location.putExtra("subServicetype", strFinal);
+
+                //  go_get_location.putStringArrayListExtra("ListId", idList);
                 manager.setService_selected(String.valueOf(selected_ser_type));
                 startActivity(go_get_location);
                 finish();
+
+          //-----------------------------------------------------------
             }
         });
+
+
 //********************************************************************
         selected_ser_type = getIntent().getIntExtra("ser_typ", 4);
         Toast.makeText(this, "servTypeId" + selected_ser_type, Toast.LENGTH_SHORT).show();
@@ -123,7 +148,7 @@ public class Service_provider_reg1 extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-        //-************************************
+        //************************************
 
         location_from_map = getIntent().getStringExtra("my_loc");
 
@@ -157,6 +182,9 @@ public class Service_provider_reg1 extends AppCompatActivity {
 
                     to_provider.putExtra("service_in", Service_Id);
                     to_provider.putExtra("sub_service_in", Sub_Service_Id);
+                    to_provider.putExtra("subServicetype", strFinal);
+                    to_provider.putStringArrayListExtra("ListId", idList);
+
                     if (spin_service.getSelectedItem().toString().equals("Select Service")) {
                         ChooseSubService.clear();
                         ChooseSubService.clear();
@@ -169,11 +197,24 @@ public class Service_provider_reg1 extends AppCompatActivity {
                         finish();
                     }
 
-
                     Toast.makeText(Service_provider_reg1.this, "ser_id" + Service_Id, Toast.LENGTH_SHORT).show();
                     Toast.makeText(Service_provider_reg1.this, "sub_ser_id" + Sub_Service_Id, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Service_provider_reg1.this, "sub_ser" + strFinal, Toast.LENGTH_SHORT).show();
                 }
 
+                //-------------------------------
+
+                List<SubCategoryModel> stList = subCategoryAdapter.getItemDetailList();
+                for (SubCategoryModel itemDetails : stList) {
+                    if (itemDetails.isSelected()) {
+                        String sub = itemDetails.getId();
+                        idList.add(itemDetails.getId());
+                        builder.append(sub + ",");
+                        strFinal = String.valueOf(builder);
+                        Log.e("Subject", sub);
+                        Log.e("Appended", strFinal);
+                    }
+                }
             }
         });
 
@@ -197,8 +238,8 @@ public class Service_provider_reg1 extends AppCompatActivity {
                     String s = spin_service.getItemAtPosition(position).toString();
                     if (ServiceHashMap.get(i).getService_name().equals(spin_service.getItemAtPosition(position))) {
                         Service_Id = ServiceHashMap.get(i).getSer_id();
-                      //  new SubServiceExecuteTask(ServiceHashMap.get(i).getSer_id()).execute();
-                       new PostSubcategory(ServiceHashMap.get(i).getSer_id()).execute();
+                        //  new SubServiceExecuteTask(ServiceHashMap.get(i).getSer_id()).execute();
+                        new PostSubcategory(ServiceHashMap.get(i).getSer_id()).execute();
 
                         Toast.makeText(Service_provider_reg1.this, "ser_id" + Service_Id, Toast.LENGTH_SHORT).show();
 
@@ -215,7 +256,6 @@ public class Service_provider_reg1 extends AppCompatActivity {
 
                 }
             }
-
 
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
@@ -242,7 +282,6 @@ public class Service_provider_reg1 extends AppCompatActivity {
 
                     }
                 }
-
 
                 @Override
                 public void onNothingSelected(AdapterView<?> arg0) {
@@ -631,9 +670,10 @@ public class Service_provider_reg1 extends AppCompatActivity {
                 try {
                     jsonObject = new JSONObject(result);
                     String responce = jsonObject.getString("responce");
+                    subcatlist.clear();
                     if (responce.equals("true")) {
                         JSONArray dataArray = jsonObject.getJSONArray("data");
-                        for (int i=0; i<dataArray.length(); i++){
+                        for (int i = 0; i < dataArray.length(); i++) {
                             JSONObject dataObj = dataArray.getJSONObject(i);
                             String id = dataObj.getString("id");
                             String Service = dataObj.getString("Service");
@@ -646,6 +686,9 @@ public class Service_provider_reg1 extends AppCompatActivity {
                         }
 
                         subCategoryAdapter = new SubCategoryAdapter(Service_provider_reg1.this, subcatlist);
+                        LinearLayoutManager llm = new LinearLayoutManager(Service_provider_reg1.this);
+                        llm.setOrientation(LinearLayoutManager.VERTICAL);
+                        subType.setLayoutManager(llm);
                         subType.setAdapter(subCategoryAdapter);
 
                         if (responce.equalsIgnoreCase("true")) {

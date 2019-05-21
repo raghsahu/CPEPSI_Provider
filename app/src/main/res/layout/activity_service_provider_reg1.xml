@@ -58,10 +58,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="false"
             android:gravity="center"
-            android:layout_marginLeft="5dp"
-            android:text="Please Select Service Subtype"
+            android:text="Please Select Service"
+            android:textAllCaps="false"
             android:textSize="15dp"></TextView>
 
         <LinearLayout
@@ -95,12 +94,13 @@
             android:padding="5dp">
 
             <LinearLayout
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:background="@drawable/xml_textbox_bg"
                 android:gravity="center"
-                android:textColorHint="#000">
+                android:padding="5dp"
+                android:textColorHint="#000"
+                android:visibility="gone">
 
                 <Spinner
                     android:id="@+id/sub_type_drop"
@@ -109,10 +109,18 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:orientation="vertical"
+            <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Please Select Service Subtype"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/subType"
@@ -125,11 +133,11 @@
         </LinearLayout>
 
         <LinearLayout
-            android:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:visibility="gone">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -142,9 +150,7 @@
                     android:id="@+id/type_drop"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:entries="@array/business_type"
-                    >
-                </Spinner>
+                    android:entries="@array/business_type"></Spinner>
 
             </LinearLayout>
         </LinearLayout>
@@ -153,9 +159,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="15dp"
             android:layout_marginBottom="5dp"
-            android:layout_marginTop="20dp"
             android:gravity="center"
             android:padding="5dp">
 

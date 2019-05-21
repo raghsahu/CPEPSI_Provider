@@ -310,7 +310,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Adhar Number"
-
                     android:inputType="number"
                     android:singleLine="true"
                     android:textColor="#000"

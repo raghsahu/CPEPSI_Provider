@@ -37,6 +37,7 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
     public void onBindViewHolder(final SubCategoryAdapter.ViewHolder holder, int position) {
         SubCategoryModel subCategoryModel = subjectWithList.get(position);
         holder.txtView.setText(subCategoryModel.getServiceSubCategory());
+        holder.serviceCharge.setText(subCategoryModel.getServiceCharge());
         holder.checkBox.setOnCheckedChangeListener(null);
 
         //if true, your checkbox will be selected, else unselected
@@ -62,12 +63,13 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView txtView;
+        TextView txtView,serviceCharge;
         CheckBox checkBox;
 
         public ViewHolder(View itemView) {
             super(itemView);
             txtView = itemView.findViewById(R.id.txtId);
+            serviceCharge = itemView.findViewById(R.id.serviceCharge);
             checkBox = itemView.findViewById(R.id.subCheckBox);
             this.setIsRecyclable(false);
             /*checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

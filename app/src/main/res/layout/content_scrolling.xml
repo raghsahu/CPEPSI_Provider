@@ -146,22 +146,55 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
+                android:layout_marginBottom="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:textColorHint="#000">
 
                 <EditText
                     android:id="@+id/photoId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="2000"
-                    android:hint="Photo ID and DOB"
-                    android:inputType="textPersonName|textMultiLine"
+                    android:hint="Photo ID "
+                    android:inputType="number"
                     android:textColor="#000"
                     android:textSize="13dp" />
 
             </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:weightSum="1"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_weight="0.15"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="#000">
+
+                    <EditText
+                        android:id="@+id/dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="DOB"
+                        android:editable="false"
+                        android:enabled="false"
+                        android:textColor="#000"
+                        android:textSize="13dp" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <ImageView
+                    android:id="@+id/calender"
+                    android:layout_weight="0.85"
+                    android:src="@drawable/calen"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -173,9 +206,8 @@
                     android:id="@+id/cancelCheck"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="2000"
                     android:hint="Cancel check"
-                    android:inputType="textPersonName|textMultiLine"
+                    android:inputType="textPersonName"
                     android:textColor="#000"
                     android:textSize="13dp" />
 
@@ -191,9 +223,8 @@
                     android:id="@+id/bankDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="2000"
                     android:hint="Bank detail"
-                    android:inputType="textPersonName|textMultiLine"
+                    android:inputType="text"
                     android:textColor="#000"
                     android:textSize="13dp" />
 
@@ -209,9 +240,9 @@
                     android:id="@+id/aadharCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:maxLength="2000"
-                    android:hint="AADHAAR Card"
-                    android:inputType="textPersonName|textMultiLine"
+                    android:hint="AADHAAR No"
+                    android:singleLine="true"
+                    android:inputType="number"
                     android:textColor="#000"
                     android:textSize="13dp" />
 

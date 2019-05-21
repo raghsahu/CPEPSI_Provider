@@ -1,6 +1,7 @@
 package com.provider.admin.cpepsi_provider;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -14,12 +15,15 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -54,8 +58,11 @@ import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -65,7 +72,7 @@ public class Profile_Completion extends AppCompatActivity {
     boolean isShow = false;
     int scrollRange = -1;
     CircleImageView profile_image;
-    ImageView badge_notification_1;
+    ImageView badge_notification_1,calender;
     private String userChoosenTask;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     public static final String KEY_IMAGE_STORAGE_PATH = "image_path";
@@ -83,9 +90,12 @@ public class Profile_Completion extends AppCompatActivity {
     private ProfileModel profileModel;
     Button profile_submit;
     EditText profileName, profileEmail, profileNumber, profilePassword, profileAddress, profileBusiness, profileLocation,
-            photoId,cancelCheck,bankDetail,aadharCard,addressProof;
+            photoId,dob,cancelCheck,bankDetail,aadharCard,addressProof;
     String ProfileName, ProfileEmail, ProfileNumber, ProfilePassword, ProfileAddress, ProfileBusiness, ProfileLocation,
-            PhotoId,CancelCheck,BankDetail,AadharCard,AddressProof;
+            PhotoId,Dob,CancelCheck,BankDetail,AadharCard,AddressProof;
+    final Calendar myCalendar = Calendar.getInstance();
+    private String beforeText, currentText;
+    private boolean noAction, addStroke, dontAddChar, deleteStroke;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,11 +137,12 @@ public class Profile_Completion extends AppCompatActivity {
         profileBusiness = (EditText) findViewById(R.id.profileBusiness);
         profileLocation = (EditText) findViewById(R.id.profileLocation);
         photoId = (EditText) findViewById(R.id.photoId);
+        dob = (EditText) findViewById(R.id.dob);
         cancelCheck = (EditText) findViewById(R.id.cancelCheck);
         bankDetail = (EditText) findViewById(R.id.bankDetail);
         aadharCard = (EditText) findViewById(R.id.aadharCard);
         addressProof = (EditText) findViewById(R.id.addressProof);
-
+        calender = (ImageView) findViewById(R.id.calender);
 
 
         badge_notification_1.setOnClickListener(new View.OnClickListener() {
@@ -158,6 +169,7 @@ public class Profile_Completion extends AppCompatActivity {
                 ProfileBusiness = profileBusiness.getText().toString();
                 ProfileLocation = profileLocation.getText().toString();
                 PhotoId = photoId.getText().toString();
+                Dob = dob.getText().toString();
                 CancelCheck = cancelCheck.getText().toString();
                 BankDetail = bankDetail.getText().toString();
                 AadharCard = aadharCard.getText().toString();
@@ -167,12 +179,92 @@ public class Profile_Completion extends AppCompatActivity {
             }
         });
 
+        final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                updateLabel();
+            }
+
+        };
+
+        calender.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                new DatePickerDialog(Profile_Completion.this, date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        aadharCard.addTextChangedListener(new TextWatcher(){
+            // private EditText creditCard;
+
+            public void afterTextChanged(Editable s) {
+                if (addStroke) {
+                    Log.i("TextWatcherImplement", "afterTextChanged String == " + s + " beforeText == " + beforeText + " currentText == " + currentText);
+                    noAction = true;
+                    addStroke = false;
+                    aadharCard.setText(currentText + "-");
+                } else if (dontAddChar) {
+                    dontAddChar = false;
+                    noAction = true;
+                    aadharCard.setText(beforeText);
+                } else if (deleteStroke) {
+                    deleteStroke = false;
+                    noAction = true;
+                    currentText = currentText.substring(0, currentText.length() - 1);
+                    aadharCard.setText(currentText);
+                } else {
+                    noAction = false;
+                    aadharCard.setSelection(aadharCard.getText().length()); // set cursor at the end of the line.
+                }
+            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){
+                Log.i("TextWatcherImplement", "beforeTextChanged start==" + String.valueOf(start) + " count==" + String.valueOf(count) + " after==" + String.valueOf(after));
+                if (start >= 14)
+                    beforeText = s.toString();
+
+            }
+            public void onTextChanged(CharSequence s, int start, int before, int count){
+                Log.i("TextWatcherImplement", "onTextChanged start==" + String.valueOf(start) + " before==" + String.valueOf(before) + " count==" + String.valueOf(count) + " noAction ==" + String.valueOf(noAction));
+                if ( (before < count) && !noAction ) {
+                    if ( (start == 3) || (start == 8)  ) {
+                        currentText = s.toString();
+                        addStroke = true;
+                    } else if (start >= 14) {
+                        currentText = s.toString();
+                        dontAddChar = true;
+                    }
+                } else {
+                    if ( (start == 4) ||  (start == 9)  ) { //(start == 5) || (start == 10) || (start == 15)
+                        currentText = s.toString();
+                        deleteStroke = true;
+                    }
+                }
+            }
+        });
+
         if (Connectivity.isNetworkAvailable(Profile_Completion.this)) {
             new PostReceiptUpdate().execute();
         }else {
             Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void updateLabel() {
+        String myFormat = "dd/MM/yyyy"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        dob.setText(sdf.format(myCalendar.getTime()));
     }
 
     //---------------------------------------------------------------
@@ -513,12 +605,12 @@ public class Profile_Completion extends AppCompatActivity {
                 postDataParams.put("business", ProfileBusiness);
                 postDataParams.put("location", ProfileLocation);
                 postDataParams.put("user_id", UserId);
-
-                postDataParams.put("user_id", UserId);
-                postDataParams.put("user_id", UserId);
-                postDataParams.put("user_id", UserId);
-                postDataParams.put("user_id", UserId);
-                postDataParams.put("user_id", UserId);
+                postDataParams.put("photo_id", PhotoId);
+                postDataParams.put("dob", Dob);
+                postDataParams.put("cancel_check", CancelCheck);
+                postDataParams.put("bank_detail", BankDetail);
+                postDataParams.put("adharno", AadharCard);
+                postDataParams.put("address_proof", AddressProof);
 
                 Log.e("postDataParams", postDataParams.toString());
 
@@ -585,6 +677,12 @@ public class Profile_Completion extends AppCompatActivity {
                     String place = dataObj.getString("place");
                     String emailid = dataObj.getString("emailid");
                     String password = dataObj.getString("password");
+                    String photo_id = dataObj.getString("photo_id");
+                    String cancel_check = dataObj.getString("cancel_check");
+                    String dob = dataObj.getString("dob");
+                    String adharno = dataObj.getString("adharno");
+                    String bank_detail = dataObj.getString("bank_detail");
+                    String address_proof = dataObj.getString("address_proof");
                     String Designation = dataObj.getString("Designation");
                     String business = dataObj.getString("business");
                     String status = dataObj.getString("status");
@@ -597,7 +695,12 @@ public class Profile_Completion extends AppCompatActivity {
                         profileAddress.setText("");
                         profileBusiness.setText("");
                         profileLocation.setText("");
-                        Toast.makeText(Profile_Completion.this, responce, Toast.LENGTH_SHORT).show();
+                        photoId.setText("");
+                        cancelCheck.setText("");
+                        bankDetail.setText("");
+                        aadharCard.setText("");
+                        addressProof.setText("");
+                      //  Toast.makeText(Profile_Completion.this, responce, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Profile_Completion.this, Home_navigation.class);
                         startActivity(intent);
                         finish();
@@ -719,6 +822,7 @@ public class Profile_Completion extends AppCompatActivity {
 
                     jsonObject = new JSONObject(result);
                     String responce = jsonObject.getString("responce");
+                    if (responce.equals("true")){
                     JSONObject dataObj = jsonObject.getJSONObject("data");
                     String user_id = dataObj.getString("user_id");
                     String TypeofFirm = dataObj.getString("TypeofFirm");
@@ -729,8 +833,12 @@ public class Profile_Completion extends AppCompatActivity {
                     String place = dataObj.getString("place");
                     String number = dataObj.getString("number");
                     String name = dataObj.getString("name");
-                    String dob = dataObj.getString("dob");
+                    String photo_id = dataObj.getString("photo_id");
+                    String cancel_check = dataObj.getString("cancel_check");
+                    String dobd = dataObj.getString("dob");
                     String adharno = dataObj.getString("adharno");
+                    String bank_detail = dataObj.getString("bank_detail");
+                    String address_proof = dataObj.getString("address_proof");
                     String middle = dataObj.getString("middle");
                     String sirname = dataObj.getString("sirname");
                     String emailid = dataObj.getString("emailid");
@@ -747,6 +855,12 @@ public class Profile_Completion extends AppCompatActivity {
                     profileAddress.setText(City);
                     profileBusiness.setText(business);
                     profileLocation.setText(Designation);
+                    photoId.setText(photo_id);
+                    cancelCheck.setText(cancel_check);
+                    bankDetail.setText(bank_detail);
+                    aadharCard.setText(adharno);
+                    addressProof.setText(address_proof);
+                    dob.setText(dobd);
 
                     Picasso.with(Profile_Completion.this)
                             .load(communStr + image)
@@ -754,12 +868,10 @@ public class Profile_Completion extends AppCompatActivity {
                             .into(profile_image);
                     Log.e("communStr + image>>>", communStr + image);
 
-                    if (responce.equals("true")){
                         Toast.makeText(Profile_Completion.this, responce, Toast.LENGTH_SHORT).show();
                     }else {
-                        Toast.makeText(Profile_Completion.this, responce, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Profile_Completion.this, "Mobile n", Toast.LENGTH_SHORT).show();
                     }
-
 
                 } catch (JSONException e) {
                     e.printStackTrace();
